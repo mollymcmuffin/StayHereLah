@@ -9,19 +9,38 @@ const Container = styled.div`
   flex: 1 1 auto;
 `;
 
-const SearchContainer = styled.div`
+const Wrapper = styled.div`
   height: 3rem;
+  width: 10rem;
   border: solid;
+  border-color: peachpuff;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
 `;
 
+const SearchContainer = styled.div`
+  border: solid;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SearchInput = styled.input`
+  border: none;
+  height: 2rem;
+`;
+
 const Search = () => {
   return (
     <Container>
-      <SearchContainer>Search</SearchContainer>
+      <Wrapper>
+        <SearchContainer>
+          <SearchInput></SearchInput>
+        </SearchContainer>
+      </Wrapper>
     </Container>
   );
 };

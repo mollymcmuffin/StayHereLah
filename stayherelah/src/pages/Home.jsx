@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Featured from "../components/Featured";
 import background from "../images/home/houses.jpg";
 import styled from "styled-components";
 import Search from "../components/Search";
@@ -19,6 +20,7 @@ const Home = () => {
       <Container>
         <Header></Header>
         <Search></Search>
+        <Featured></Featured>
       </Container>
     </>
   );
