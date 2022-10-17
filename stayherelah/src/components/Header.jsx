@@ -5,7 +5,7 @@ import React from "react";
 
 const Container = styled.div`
   border-color: black;
-  border-style: solid;
+  border-style: none;
   display: flex;
   align-items: center;
   gap: 10rem;
@@ -20,13 +20,13 @@ const Wrapper = styled.div`
 `;
 
 const Left = styled.div`
-  border: solid;
+  border: none;
   margin-left: 3rem;
 `;
 
 const Centre = styled.div`
   display: flex;
-  border: solid;
+  border: none;
   gap: 1rem;
 `;
 
@@ -39,10 +39,14 @@ const MenuItem = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
 `;
 
 const LogoLink = styled(Link)`
   text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
 `;
 
 const header = () => {

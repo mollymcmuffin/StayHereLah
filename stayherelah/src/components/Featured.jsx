@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   background-color: white;
-  height: 30%;
+  height: 100%;
+  flex: 1;
+  border: none;
+  border-color: red;
 `;
 
 const FeatureTitle = styled.h1`
@@ -12,20 +16,27 @@ const FeatureTitle = styled.h1`
 
 const Wrapper = styled.div`
   display: flex;
-  border: solid;
+  border: none;
   height: 100%;
   flex-wrap: wrap;
 `;
 
 const Project = styled.div`
   height: 80%;
-  border: solid;
-  border-color: red;
+  border: none;
   width: 20vw;
   margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
+  background-color: #ffe7cc;
+
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+`;
+
+const ProjectLink = styled(Link)`
+  text-decoration: none;
 `;
 
 const Title = styled.h2``;
@@ -36,22 +47,34 @@ const Featured = () => {
       <FeatureTitle>Featured projects</FeatureTitle>
       <Wrapper>
         <Project>
-          <Title>Bishan</Title>
+          <ProjectLink to={`/btoprojects`}>
+            <Title>Bishan</Title>
+          </ProjectLink>
         </Project>
         <Project>
-          <Title>Woodlands</Title>
+          <ProjectLink to={`/btoprojects`}>
+            <Title>Woodlands</Title>
+          </ProjectLink>
         </Project>
         <Project>
-          <Title>Tengah</Title>
+          <ProjectLink to={`/btoprojects`}>
+            <Title>Tengah</Title>
+          </ProjectLink>
         </Project>
         <Project>
-          <Title>Keppel</Title>
+          <ProjectLink to={`/btoprojects`}>
+            <Title>Keppel</Title>
+          </ProjectLink>
         </Project>
         <Project>
-          <Title>Yo Mama</Title>
+          <ProjectLink to={`/btoprojects`}>
+            <Title>Yishun</Title>
+          </ProjectLink>
         </Project>
         <Project>
-          <Title>Changi</Title>
+          <ProjectLink to={`/btoprojects`}>
+            <Title>Changi</Title>
+          </ProjectLink>
         </Project>
       </Wrapper>
     </Container>
