@@ -19,6 +19,8 @@ const Wrapper = styled.div`
   border: none;
   height: 100%;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Project = styled.div`
