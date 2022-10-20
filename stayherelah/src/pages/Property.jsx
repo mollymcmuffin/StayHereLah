@@ -2,15 +2,13 @@ import { React, useState, useEffect } from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import Map from "../components/Map";
-import { db } from "../firebase";
-import { ref, onValue, get } from "firebase/database";
-import { Await, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { database } from "../Firebase";
+import { getDatabase, ref, child, get } from "firebase/database";
 
 const Container = styled.div`
   height: 100vh;
 `;
-
-const PropertyContainer = styled.div``;
 
 const Wrapper = styled.div`
   background-color: peachpuff;
@@ -115,25 +113,6 @@ const Property = () => {
   const [projects, setProjects] = useState({});
   const [projectName, setProjectName] = useState("");
 
-  console.log(id);
-
-  useEffect(() => {
-    const getProjects = () => {
-      try {
-        console.log("running function");
-        const dataRef = ref(db, "mature/");
-        onValue(dataRef, (snapshot) => {
-          const data = snapshot.val();
-          setProjects(data);
-        });
-      } catch (error) {}
-    };
-
-    getProjects();
-  }, []);
-
-  console.log(projects["01Project_Name"]);
-
   return (
     <>
       <Container>
@@ -141,7 +120,7 @@ const Property = () => {
         <Wrapper>
           <ProjectContainer>
             <ProjectTitle>
-              SCSE BTO, Clark Quay 179024 {projectName}
+              SCSE BTO, Clark Quay 179024 {projects["01Project_Name"]}
             </ProjectTitle>
             <ProjectInformation>
               <LaunchDate>Upcoming Launch:</LaunchDate>
