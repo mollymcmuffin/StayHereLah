@@ -3,8 +3,9 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import Map from "../components/Map";
 import { useLocation } from "react-router-dom";
-import { database } from "../Firebase";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { db } from "../firebase";
+import { onValue, ref } from "firebase/database";
+import ProjectDetails from "../components/ProjectDetails";
 
 const Container = styled.div`
   height: 100vh;
@@ -109,59 +110,42 @@ const FacilitiesWrapper = styled.div`
 
 const Property = () => {
   const location = useLocation();
-  const id = location.pathname.split("/")[3];
-  const [projects, setProjects] = useState({});
-  const [projectName, setProjectName] = useState("");
+  const urlName = location.pathname.split("/"); //http://localhost:3000/bto/mature/0
+  const id = urlName[3];
+  const maturity = urlName[2];
+  const [projects, setProjects] = useState(null);
+
+  useEffect(() => {
+    onValue(ref(db), async (snapshot) => {
+      const data = await snapshot.val();
+      console.log(data["mature"]["01Project_Name"][0]);
+      setProjects(data);
+    });
+  }, []);
 
   return (
     <>
-      <Container>
-        <Header></Header>
-        <Wrapper>
-          <ProjectContainer>
-            <ProjectTitle>
-              SCSE BTO, Clark Quay 179024 {projects["01Project_Name"]}
-            </ProjectTitle>
-            <ProjectInformation>
-              <LaunchDate>Upcoming Launch:</LaunchDate>
-              <FlatDetails>
-                <h2>Flat types & Number of Units</h2>
-                <Detail>2 room flex xxx</Detail>
-                <Detail>3 room flex xxx</Detail>
-                <Detail>4 room flex xxx</Detail>
-              </FlatDetails>
-              <PriceContainer>
-                <PriceInfo>
-                  Selling Price (Excl. Grants)
-                  <Price>From S$102k</Price>
-                </PriceInfo>
-                <PriceInfo>
-                  Selling Price (Incl. Grants)
-                  <Price>From S$22k</Price>
-                </PriceInfo>
-              </PriceContainer>
-              <NearbyPriceContainer>
-                Transacted Prices of Resale Flats Nearby
-                <Price>$426k - $540k</Price>
-              </NearbyPriceContainer>
-            </ProjectInformation>
-            <CalculateButton>Calculate Your Personalised Cost</CalculateButton>
-          </ProjectContainer>
-          <MapFacilityContainer>
-            <FacilityContainer>
-              <Title>Nearby Facilities</Title>
-              <FacilitiesWrapper>
-                <Facility>SSS School (8 mins Walk)</Facility>
-                <Facility>Clark Quay MRT (2 mins Walk)</Facility>
-                <Facility>OCS Clinic (5 mins Walk)</Facility>
-              </FacilitiesWrapper>
-            </FacilityContainer>
-            <MapContainer>
-              <Map />
-            </MapContainer>
-          </MapFacilityContainer>
-        </Wrapper>
-      </Container>
+      {projects && (
+        <Container>
+          <Header></Header>
+          <Wrapper>
+            <ProjectDetails projects={projects} maturity={maturity} id={id} />
+            <MapFacilityContainer>
+              <FacilityContainer>
+                <Title>Nearby Facilities</Title>
+                <FacilitiesWrapper>
+                  <Facility>SSS School (8 mins Walk)</Facility>
+                  <Facility>Clark Quay MRT (2 mins Walk)</Facility>
+                  <Facility>OCS Clinic (5 mins Walk)</Facility>
+                </FacilitiesWrapper>
+              </FacilityContainer>
+              <MapContainer>
+                <Map />
+              </MapContainer>
+            </MapFacilityContainer>
+          </Wrapper>
+        </Container>
+      )}
     </>
   );
 };

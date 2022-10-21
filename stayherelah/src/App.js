@@ -1,6 +1,5 @@
 import Home from "./pages/Home";
 import Property from "./pages/Property";
-import TestingFirebase from "./components/TestingFirebase";
 import {
   BrowserRouter as Router,
   Routes,
