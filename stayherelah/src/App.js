@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Property from "./pages/Property";
 import Estimate from "./pages/Estimate";
+import Explore from "./pages/Explore";
 
 import {
   BrowserRouter as Router,
