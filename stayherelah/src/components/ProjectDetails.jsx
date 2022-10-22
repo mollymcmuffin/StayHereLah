@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const ProjectContainer = styled.div`
-  border: solid;
   border-color: purple;
   height: 100%;
   width: 100%;
@@ -15,7 +14,6 @@ const ProjectContainer = styled.div`
 const ProjectTitle = styled.h1`
   display: flex;
   justify-content: center;
-  border: solid;
 `;
 
 const ProjectInformation = styled.div`

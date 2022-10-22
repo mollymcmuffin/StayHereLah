@@ -60,7 +60,7 @@ const header = () => {
           <StyledLink to={`/explore`}>Explore</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to={`/bto`}>BTO projects</StyledLink>
+          <StyledLink to={`/btoprojects`}>BTO projects</StyledLink>
         </MenuItem>
       </Centre>
     </Container>
