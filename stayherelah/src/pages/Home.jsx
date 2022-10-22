@@ -3,8 +3,9 @@ import Featured from "../components/Featured";
 import background from "../images/home/houses.jpg";
 import styled from "styled-components";
 import Search from "../components/Search";
-
-import React from "react";
+import { db } from "../firebase";
+import { onValue, ref } from "firebase/database";
+import { React, useEffect, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -15,13 +16,25 @@ const Container = styled.div`
 `;
 
 const Home = () => {
+  const [projects, setProjects] = useState(null);
+
+  useEffect(() => {
+    onValue(ref(db), async (snapshot) => {
+      const data = await snapshot.val();
+      console.log(data["nonmature"]["01Project_Name"][0]);
+      setProjects(data);
+    });
+  }, []);
+
   return (
     <>
-      <Container>
-        <Header></Header>
-        <Search></Search>
-        <Featured></Featured>
-      </Container>
+      {projects && (
+        <Container>
+          <Header></Header>
+          <Search></Search>
+          <Featured featuredProjects={projects}></Featured>
+        </Container>
+      )}
     </>
   );
 };
