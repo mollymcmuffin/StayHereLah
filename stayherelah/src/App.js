@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Property from "./pages/Property";
 import Estimate from "./pages/Estimate";
 import Explore from "./pages/Explore";
+import BtoProjects from "./pages/BtoProjects";
 
 import {
   BrowserRouter as Router,
@@ -24,6 +25,8 @@ function App() {
           <Route path=":id" element={<Property />} />
         </Route>
         <Route path="/explore" element={<Explore />}></Route>
+
+        <Route path="/btoprojects" element={<BtoProjects />}></Route>
 
         <Route
           path="/bto/nonmature/:id/estimate"
