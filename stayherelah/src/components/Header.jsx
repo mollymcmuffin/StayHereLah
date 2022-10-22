@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 const Left = styled.div`
   border: none;
   margin-left: 3rem;
+  color: black;
 `;
 
 const Centre = styled.div`
@@ -35,6 +36,7 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 1.5rem;
   text-decoration: none;
+  color: black;
 `;
 
 const StyledLink = styled(Link)`
@@ -52,16 +54,18 @@ const LogoLink = styled(Link)`
 const header = () => {
   return (
     <Container>
-      <Left>
-        <LogoLink to={`/`}>StayHereLah!</LogoLink>
-      </Left>
+      <LogoLink to={`/`}>
+        <Left>StayHereLah!</Left>
+      </LogoLink>
+
       <Centre>
-        <MenuItem>
-          <StyledLink to={`/explore`}>Explore</StyledLink>
-        </MenuItem>
-        <MenuItem>
-          <StyledLink to={`/btoprojects`}>BTO projects</StyledLink>
-        </MenuItem>
+        <StyledLink to={`/explore`}>
+          <MenuItem>Explore</MenuItem>
+        </StyledLink>
+
+        <StyledLink to={`/btoprojects`}>
+          <MenuItem>BTO projects</MenuItem>
+        </StyledLink>
       </Centre>
     </Container>
   );

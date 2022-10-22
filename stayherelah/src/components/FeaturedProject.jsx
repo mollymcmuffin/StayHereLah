@@ -22,6 +22,7 @@ const ProjectLink = styled(Link)`
 
 const Title = styled.h2`
   text-align: center;
+  color: black;
 `;
 
 const FeaturedProject = ({ project, id, category }) => {
