@@ -10,26 +10,24 @@ const Container = styled.div`
 `;
 
 const ProjectContainer = styled.div`
-  border: solid;
   background-color: #f6416c;
-  border-color: red;
   height: 80%;
   width: 40vw;
   overflow: auto;
   margin-top: 5rem;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
 const Project = styled.div`
-  border: solid;
   border-radius: 10px;
   background-color: #ffde7d;
-  border-color: blue;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 3rem;
   margin: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
 const ProjectLink = styled(Link)`
