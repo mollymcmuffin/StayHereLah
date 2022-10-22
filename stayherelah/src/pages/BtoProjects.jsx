@@ -8,6 +8,8 @@ import { onValue, ref } from "firebase/database";
 
 const Container = styled.div`
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Wrapper = styled.div`
@@ -23,16 +25,8 @@ const MapFacilityContainer = styled.div`
   width: 100%;
 `;
 
-const Title = styled.h1``;
-
 const MapContainer = styled.div`
   height: 100%;
-`;
-
-const FacilitiesWrapper = styled.div`
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
 `;
 
 const BtoProjects = () => {

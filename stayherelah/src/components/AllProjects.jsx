@@ -28,6 +28,7 @@ const Project = styled.div`
   height: 3rem;
   margin: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  color: black;
 `;
 
 const ProjectLink = styled(Link)`
@@ -41,18 +42,14 @@ const AllProjects = ({ data }) => {
     <Container>
       <ProjectContainer>
         {nonmature.map((project) => (
-          <Project>
-            <ProjectLink to={`/bto/nonmature/${nonmature.indexOf(project)}`}>
-              {project}
-            </ProjectLink>
-          </Project>
+          <ProjectLink to={`/bto/nonmature/${nonmature.indexOf(project)}`}>
+            <Project>{project}</Project>
+          </ProjectLink>
         ))}
         {mature.map((project) => (
-          <Project>
-            <ProjectLink to={`/bto/mature/${mature.indexOf(project)}`}>
-              {project}
-            </ProjectLink>
-          </Project>
+          <ProjectLink to={`/bto/mature/${mature.indexOf(project)}`}>
+            <Project>{project}</Project>
+          </ProjectLink>
         ))}
       </ProjectContainer>
     </Container>
