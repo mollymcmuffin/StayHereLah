@@ -22,6 +22,7 @@ function App() {
         <Route path="/bto/nonmature" element={<Property />}>
           <Route path=":id" element={<Property />} />
         </Route>
+        <Route path="/explore" element={<Explore />}></Route>
 
         <Route
           path="/bto/nonmature/:id/estimate"
