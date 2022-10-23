@@ -51,14 +51,6 @@ const FacilitiesWrapper = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const FacilityButton = styled.button`
-  background-color: #ffde7d;
-  padding: 0.5rem;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  cursor: pointer;
-`;
-
 const Title = styled.h1``;
 
 const MapContainer = styled.div`
@@ -71,32 +63,58 @@ const FacilitiesInfo = styled.div`
   justify-content: center;
 `;
 
+const FacilityInput = styled.input``;
+const FacilityBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+const FacilityTitle = styled.span``;
+
 const Property = () => {
   const location = useLocation();
   const urlName = location.pathname.split("/"); //http://localhost:3000/bto/mature/0
   const id = urlName[3];
   const maturity = urlName[2];
   const [projects, setProjects] = useState(null);
-  const [mall, setMall] = useState(null);
-  const [mrt, setMrt] = useState(null);
-  const [prisch, setPrisch] = useState(null);
-  const [secsch, setSecsch] = useState(null);
+  const [mallxy, setMallxy] = useState(null);
+  const [mrtxy, setMrtxy] = useState(null);
+  const [prischxy, setPrischxy] = useState(null);
+  const [secschxy, setSecschxy] = useState(null);
+  const [highwayxy, setHighwayxy] = useState(null);
+  const [option, setOption] = useState(0);
+  const [facility, setFacility] = useState({
+    facilities: {
+      mrt: false,
+      mall: false,
+      prisch: false,
+      secsch: false,
+      highway: false,
+    },
+  });
 
   useEffect(() => {
     onValue(ref(db), async (snapshot) => {
       const data = await snapshot.val();
-      console.log(data["mature"]["01Project_Name"][0]);
       setProjects(data);
-      setMall(data[maturity]["05mall"][`mall0${id}`]);
-      setMrt(data[maturity]["06mrt"][`mrt0${id}`]);
-      setPrisch(data[maturity]["08Primary_School"][`Primary_School0${id}`]);
-      setSecsch(data[maturity]["09Secondary_School"][`Secondary_School${id}`]);
-      console.log(mrt);
-      console.log(mall);
-      console.log(prisch);
-      console.log(secsch);
+      setMallxy(data[maturity]["05mall"][`mall0${id}`]["Mall_XY"]);
+      setMrtxy(data[maturity]["06mrt"][`mrt0${id}`]["Mrt_XY"]);
+      setPrischxy(
+        data[maturity]["08Primary_School"][`Primary_School0${id}`]["Primary_XY"]
+      );
+      setSecschxy(
+        data[maturity]["09Secondary_School"][`Secondary_School${id}`]["Sec_XY"]
+      );
+      setHighwayxy(data[maturity]["04highway"][`highway0${id}`]["highway_XY"]);
     });
   }, []);
+
+  const handleFacility = (e) => {
+    let facilities = { ...facility.facilities };
+    let name = e.target.name;
+    facilities[name] = !facilities[name];
+    setFacility({ facilities: facilities });
+  };
 
   return (
     <>
@@ -110,16 +128,56 @@ const Property = () => {
                 <FacilitiesWrapper>
                   <Title>Nearby Facilities</Title>
                   <FacilitiesInfo>
-                    <FacilityButton>MRT</FacilityButton>
-                    <FacilityButton>Mall</FacilityButton>
-                    <FacilityButton>Primary School</FacilityButton>
-                    <FacilityButton>Secondary School</FacilityButton>
-                    <FacilityButton>Highway</FacilityButton>
+                    <FacilityBox>
+                      <FacilityTitle>MRT</FacilityTitle>
+                      <FacilityInput
+                        type="checkbox"
+                        name="mrt"
+                        onChange={handleFacility}
+                      />
+                    </FacilityBox>
+                    <FacilityBox>
+                      <FacilityTitle>Mall</FacilityTitle>
+                      <FacilityInput
+                        type="checkbox"
+                        name="mall"
+                        onChange={handleFacility}
+                      />
+                    </FacilityBox>
+                    <FacilityBox>
+                      <FacilityTitle>Primary School</FacilityTitle>
+                      <FacilityInput
+                        type="checkbox"
+                        name="prisch"
+                        onChange={handleFacility}
+                      />
+                    </FacilityBox>
+                    <FacilityBox>
+                      <FacilityTitle>Secondary School</FacilityTitle>
+                      <FacilityInput
+                        type="checkbox"
+                        name="secsch"
+                        onChange={handleFacility}
+                      />
+                    </FacilityBox>
+                    <FacilityBox>
+                      <FacilityTitle>Highway</FacilityTitle>
+                      <FacilityInput
+                        type="checkbox"
+                        name="highway"
+                        onChange={handleFacility}
+                      />
+                    </FacilityBox>
                   </FacilitiesInfo>
                 </FacilitiesWrapper>
               </FacilityContainer>
               <MapContainer>
-                <Map />
+                <Map
+                  facilities={facility}
+                  projects={projects}
+                  maturity={maturity}
+                  id={id}
+                />
               </MapContainer>
             </MapFacilityContainer>
           </Wrapper>
