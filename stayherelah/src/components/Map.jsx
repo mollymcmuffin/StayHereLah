@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useMemo } from "react";
 import {
   useLoadScript,
   Marker,
@@ -13,6 +13,7 @@ const containerStyle = {
 };
 
 const Map = ({ facilities, projects, maturity, id }) => {
+  const center = useMemo(() => ({ lat: 1.3678, lng: 103.8028 }), []);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBeU0KYm091allUovk19s4Aw4KfI7l43aI",
   });
@@ -36,18 +37,14 @@ const Map = ({ facilities, projects, maturity, id }) => {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <GoogleMap
-      zoom={11}
-      center={{ lat: 1.3678, lng: 103.8028 }}
-      mapContainerStyle={containerStyle}
-    >
+    <GoogleMap zoom={11} center={center} mapContainerStyle={containerStyle}>
       {facilities.facilities.mrt &&
         mrt["Mrt_XY"].map((xy, index) => (
           <Marker
             key={index}
             position={{ lat: xy[1], lng: xy[0] }}
             onClick={() => {
-              setSelectedFacility([mrt["Mrt_XY"][index], xy[1], xy[0]]);
+              setSelectedFacility([mrt["Mrt"][index], xy[1], xy[0]]);
             }}
           />
         ))}
@@ -57,7 +54,7 @@ const Map = ({ facilities, projects, maturity, id }) => {
             key={index}
             position={{ lat: xy[1], lng: xy[0] }}
             onClick={() => {
-              setSelectedFacility([mall["Mrt"][index], xy[1], xy[0]]);
+              setSelectedFacility([mall["Mall"][index], xy[1], xy[0]]);
             }}
           />
         ))}
@@ -107,6 +104,9 @@ const Map = ({ facilities, projects, maturity, id }) => {
           position={{
             lat: selectedFacility[1],
             lng: selectedFacility[2],
+          }}
+          onCloseClick={() => {
+            setSelectedFacility(null);
           }}
         >
           <div>{selectedFacility[0]}</div>
