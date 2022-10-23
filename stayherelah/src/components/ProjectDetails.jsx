@@ -68,9 +68,9 @@ const CalculateButton = styled.button`
 `;
 
 const ProjectDetails = ({ projects, id, maturity }) => {
-  console.log(projects);
+  //console.log(projects);
   const flatData = [...projects[maturity]["03flattype"][`flattype0${id}`]];
-  console.log(flatData);
+  //console.log(flatData);
   return (
     <ProjectContainer>
       <Wrapper>
@@ -82,7 +82,7 @@ const ProjectDetails = ({ projects, id, maturity }) => {
           <FlatDetails>
             <h2>Flat types & Number of Units</h2>
             {flatData.map((info) => (
-              <Detail>{info}</Detail>
+              <Detail key={flatData.indexOf(info)}>{info}</Detail>
             ))}
           </FlatDetails>
           <PriceContainer>
