@@ -12,8 +12,17 @@ const containerStyle = {
   height: "100%",
 };
 
+const Popup = styled.div`
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: medium;
+  border-radius: 10px;
+`;
+
 const Map = ({ facilities, projects, maturity, id }) => {
-  const center = useMemo(() => ({ lat: 1.3678, lng: 103.8028 }), []);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBeU0KYm091allUovk19s4Aw4KfI7l43aI",
   });
@@ -23,10 +32,15 @@ const Map = ({ facilities, projects, maturity, id }) => {
   const prisch = projects[maturity]["08Primary_School"][`Primary_School0${id}`];
   const secsch =
     projects[maturity]["09Secondary_School"][`Secondary_School${id}`];
-
   const highway = projects[maturity]["04highway"][`highway0${id}`];
-
   const [selectedFacility, setSelectedFacility] = useState(null);
+  const center = useMemo(
+    () => ({
+      lat: prisch["Primary_XY"][0][1],
+      lng: prisch["Primary_XY"][0][0],
+    }),
+    []
+  );
 
   // console.log("Testing");
   // console.log(mallxy);
@@ -37,7 +51,7 @@ const Map = ({ facilities, projects, maturity, id }) => {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <GoogleMap zoom={11} center={center} mapContainerStyle={containerStyle}>
+    <GoogleMap zoom={13} center={center} mapContainerStyle={containerStyle}>
       {facilities.facilities.mrt &&
         mrt["Mrt_XY"].map((xy, index) => (
           <Marker
@@ -109,7 +123,7 @@ const Map = ({ facilities, projects, maturity, id }) => {
             setSelectedFacility(null);
           }}
         >
-          <div>{selectedFacility[0]}</div>
+          <Popup>{selectedFacility[0]}</Popup>
         </InfoWindow>
       )}
     </GoogleMap>

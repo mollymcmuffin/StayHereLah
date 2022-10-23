@@ -28,7 +28,7 @@ const Title = styled.h2`
 const FeaturedProject = ({ project, id, category }) => {
   return (
     <Project>
-      <ProjectLink to={`/bto/${category}/${id}`}>
+      <ProjectLink to={`/btoprojects/${category}/${id}`}>
         <Title>{project}</Title>
       </ProjectLink>
     </Project>
