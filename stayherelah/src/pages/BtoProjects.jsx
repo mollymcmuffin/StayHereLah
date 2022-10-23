@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import Map from "../components/Map";
+import MapForAllProjects from "../components/MapForAllProjects";
 import AllProjects from "../components/AllProjects";
 import { db } from "../firebase";
 import { onValue, ref } from "firebase/database";
@@ -48,7 +49,7 @@ const BtoProjects = () => {
             <AllProjects data={data} />
             <MapFacilityContainer>
               <MapContainer>
-                <Map />
+                <MapForAllProjects />
               </MapContainer>
             </MapFacilityContainer>
           </Wrapper>
