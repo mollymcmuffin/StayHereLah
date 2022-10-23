@@ -15,8 +15,8 @@ const MapForAllProjects = ({}) => {
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <GoogleMap
-      zoom={12}
-      center={{ lat: 1.287953, lng: 103.851784 }}
+      zoom={11}
+      center={{ lat: 1.3678, lng: 103.8028 }}
       mapContainerStyle={containerStyle}
     >
       <Marker position={{ lat: 1.288488, lng: 103.8059398 }} />
