@@ -17,11 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
 
-        <Route path="/bto/mature" element={<Property />}>
+        <Route path="/btoprojects/mature" element={<Property />}>
           <Route path=":id" element={<Property />} />
         </Route>
 
-        <Route path="/bto/nonmature" element={<Property />}>
+        <Route path="/btoprojects/nonmature" element={<Property />}>
           <Route path=":id" element={<Property />} />
         </Route>
         <Route path="/explore" element={<Explore />}></Route>

@@ -1,5 +1,10 @@
-import { React, useMemo } from "react";
-import { useLoadScript, Marker, GoogleMap } from "@react-google-maps/api";
+import { React, useState } from "react";
+import {
+  useLoadScript,
+  Marker,
+  GoogleMap,
+  InfoWindow,
+} from "@react-google-maps/api";
 import styled from "styled-components";
 
 const containerStyle = {
@@ -12,62 +17,101 @@ const Map = ({ facilities, projects, maturity, id }) => {
     googleMapsApiKey: "AIzaSyBeU0KYm091allUovk19s4Aw4KfI7l43aI",
   });
 
-  const mallxy = projects[maturity]["05mall"][`mall0${id}`]["Mall_XY"];
-  const mrtxy = projects[maturity]["06mrt"][`mrt0${id}`]["Mrt_XY"];
-  const prischxy =
-    projects[maturity]["08Primary_School"][`Primary_School0${id}`][
-      "Primary_XY"
-    ];
-  const secschxy =
-    projects[maturity]["09Secondary_School"][`Secondary_School${id}`]["Sec_XY"];
+  const mall = projects[maturity]["05mall"][`mall0${id}`];
+  const mrt = projects[maturity]["06mrt"][`mrt0${id}`];
+  const prisch = projects[maturity]["08Primary_School"][`Primary_School0${id}`];
+  const secsch =
+    projects[maturity]["09Secondary_School"][`Secondary_School${id}`];
 
-  const highwayxy =
-    projects[maturity]["04highway"][`highway0${id}`]["highway_XY"];
+  const highway = projects[maturity]["04highway"][`highway0${id}`];
+
+  const [selectedFacility, setSelectedFacility] = useState(null);
+
+  // console.log("Testing");
+  // console.log(mallxy);
+  // console.log(mrtxy);
+  // console.log(prischxy);
+  // console.log(secschxy);
+  // console.log(highwayxy);
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <GoogleMap
-      zoom={12}
-      center={{ lat: 1.287953, lng: 103.851784 }}
+      zoom={11}
+      center={{ lat: 1.3678, lng: 103.8028 }}
       mapContainerStyle={containerStyle}
     >
       {facilities.facilities.mrt &&
-        mrtxy.map((xy) => (
+        mrt["Mrt_XY"].map((xy, index) => (
           <Marker
-            key={mrtxy.indexOf(xy)}
+            key={index}
             position={{ lat: xy[1], lng: xy[0] }}
+            onClick={() => {
+              setSelectedFacility([mrt["Mrt_XY"][index], xy[1], xy[0]]);
+            }}
           />
         ))}
       {facilities.facilities.mall &&
-        mallxy.map((xy) => (
+        mall["Mall_XY"].map((xy, index) => (
           <Marker
-            key={mrtxy.indexOf(xy)}
+            key={index}
             position={{ lat: xy[1], lng: xy[0] }}
+            onClick={() => {
+              setSelectedFacility([mall["Mrt"][index], xy[1], xy[0]]);
+            }}
           />
         ))}
       {facilities.facilities.prisch &&
-        prischxy.map((xy) => (
+        prisch["Primary_XY"].map((xy, index) => (
           <Marker
-            key={mrtxy.indexOf(xy)}
+            key={index}
             position={{ lat: xy[1], lng: xy[0] }}
+            onClick={() => {
+              setSelectedFacility([
+                prisch["Primary_School"][index],
+                xy[1],
+                xy[0],
+              ]);
+            }}
           />
         ))}
       {facilities.facilities.secsch &&
-        secschxy.map((xy) => (
+        secsch["Sec_XY"].map((xy, index) => (
           <Marker
-            key={mrtxy.indexOf(xy)}
+            key={index}
             position={{ lat: xy[1], lng: xy[0] }}
+            onClick={() => {
+              setSelectedFacility([
+                secsch["Secondary_School"][index],
+                xy[1],
+                xy[0],
+              ]);
+            }}
           />
         ))}
       {facilities.facilities.highway &&
-        highwayxy.map((xy) => (
+        highway["highway_XY"].map((xy, index) => (
           <Marker
-            key={mrtxy.indexOf(xy)}
+            key={index}
             position={{ lat: xy[1], lng: xy[0] }}
+            onClick={() => {
+              setSelectedFacility([highway["highway"][index], xy[1], xy[0]]);
+            }}
           />
         ))}
+
       {/* <Marker position={{ lat: 1.3717, lng: 103.893 }} />
       <Marker position={{ lat: 1.288488, lng: 103.8059398 }} /> */}
+      {selectedFacility && (
+        <InfoWindow
+          position={{
+            lat: selectedFacility[1],
+            lng: selectedFacility[2],
+          }}
+        >
+          <div>{selectedFacility[0]}</div>
+        </InfoWindow>
+      )}
     </GoogleMap>
   );
 };

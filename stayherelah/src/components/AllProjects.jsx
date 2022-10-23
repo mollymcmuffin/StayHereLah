@@ -42,12 +42,14 @@ const AllProjects = ({ data }) => {
     <Container>
       <ProjectContainer>
         {nonmature.map((project) => (
-          <ProjectLink to={`/bto/nonmature/${nonmature.indexOf(project)}`}>
+          <ProjectLink
+            to={`/btoprojects/nonmature/${nonmature.indexOf(project)}`}
+          >
             <Project>{project}</Project>
           </ProjectLink>
         ))}
         {mature.map((project) => (
-          <ProjectLink to={`/bto/mature/${mature.indexOf(project)}`}>
+          <ProjectLink to={`/btoprojects/mature/${mature.indexOf(project)}`}>
             <Project>{project}</Project>
           </ProjectLink>
         ))}
