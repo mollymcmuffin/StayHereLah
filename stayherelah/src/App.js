@@ -5,6 +5,7 @@ import Explore from "./pages/Explore";
 import BtoProjects from "./pages/BtoProjects";
 import ExploreNew from "./pages/ExploreNew";
 import NeighbourhoodSelection from "./pages/NeighbourhoodSelection";
+import "./App.css";
 
 import {
   BrowserRouter as Router,
