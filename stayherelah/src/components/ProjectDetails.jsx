@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ProjectContainer = styled.div`
   height: 100%;
@@ -37,27 +38,31 @@ const ProjectInformation = styled.div`
 
 const LaunchDate = styled.h2``;
 
-const FlatDetails = styled.div``;
+const FlatDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Detail = styled.p``;
 
 const PriceContainer = styled.div`
   display: flex;
-  gap: 3rem;
-`;
-
-const PriceInfo = styled.div`
-  display: flex;
   flex-direction: column;
-`;
-
-const Price = styled.p``;
-
-const NearbyPriceContainer = styled.div`
-  display: flex;
   gap: 1rem;
-  flex-direction: column;
-  align-items: center;
+`;
+
+const PriceInfo = styled.p`
+  display: flex;
+  font-weight: 300;
+  gap: 0.5rem;
+`;
+
+const Price = styled.p`
+  font-weight: 700;
+`;
+
+const FlatDetailsTitle = styled.h2`
+  margin-bottom: 1rem;
 `;
 
 const CalculateButton = styled.button`
@@ -65,11 +70,29 @@ const CalculateButton = styled.button`
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   cursor: pointer;
+  background-color: #344ae2;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 1rem;
 `;
 
 const ProjectDetails = ({ projects, id, maturity }) => {
   //console.log(projects);
   const flatData = [...projects[maturity]["03flattype"][`flattype0${id}`]];
+  const tworoom = projects[maturity]["16two_room_min_price"][id];
+  console.log("tworoom");
+  const threeroom = projects[maturity]["12three_room_min_price"][id];
+  console.log("threeroom");
+  const fourroom = projects[maturity]["14four_room_min_price"][id];
+  console.log("fourroom");
+  const fiveroom = projects[maturity]["18five_room_min_price"][id];
+  console.log("fiveroom");
+  const specialroom =
+    maturity == "mature"
+      ? projects[maturity]["20threegen_room_min_price"][id]
+      : projects[maturity]["20twoflexb_room_min_price"][id];
+  console.log("threegenroom");
   //console.log(flatData);
   return (
     <ProjectContainer>
@@ -80,29 +103,51 @@ const ProjectDetails = ({ projects, id, maturity }) => {
             Completion Date: {projects[maturity]["02est_time"][id]}
           </LaunchDate>
           <FlatDetails>
-            <h2>Flat types & Number of Units</h2>
+            <FlatDetailsTitle>Flat types & Number of Units</FlatDetailsTitle>
             {flatData.map((info) => (
               <Detail key={flatData.indexOf(info)}>{info}</Detail>
             ))}
           </FlatDetails>
           <PriceContainer>
-            <PriceInfo>
-              Selling Price (Excl. Grants)
-              <Price>From S$102k</Price>
-            </PriceInfo>
-            <PriceInfo>
-              Selling Price (Incl. Grants)
-              <Price>From S$22k</Price>
-            </PriceInfo>
+            {tworoom !== "nil" && (
+              <PriceInfo>
+                TWO ROOM STARTING PRICE: <Price>${tworoom}</Price>{" "}
+              </PriceInfo>
+            )}
+
+            {threeroom !== "nil" && (
+              <PriceInfo>
+                {" "}
+                THREE ROOM STARTING PRICE: <Price> ${threeroom}</Price>
+              </PriceInfo>
+            )}
+            {fourroom !== "nil" && (
+              <PriceInfo>
+                FOUR ROOM STARTING PRICE: <Price>${fourroom}</Price>
+              </PriceInfo>
+            )}
+            {fiveroom !== "nil" && (
+              <PriceInfo>
+                FIVE ROOM STARTING PRICE: <Price>${fiveroom}</Price>
+              </PriceInfo>
+            )}
+            {specialroom !== "nil" && (
+              <PriceInfo>
+                {maturity == "mature" ? "THREE-GEN ROOM" : "TWO-ROOM FLEXI"}
+                STARTING PRICE: <Price>${specialroom}</Price>
+              </PriceInfo>
+            )}
           </PriceContainer>
-          <NearbyPriceContainer>
+          {/* <NearbyPriceContainer>
             Transacted Prices of Resale Flats Nearby
             <Price>$426k - $540k</Price>
-          </NearbyPriceContainer>
+          </NearbyPriceContainer> */}
         </ProjectInformation>
       </Wrapper>
 
-      <CalculateButton>Calculate Your Personalised Cost</CalculateButton>
+      <Link to={"/estimate"}>
+        <CalculateButton>Calculate Your Loan</CalculateButton>
+      </Link>
     </ProjectContainer>
   );
 };
