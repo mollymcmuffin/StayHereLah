@@ -10,6 +10,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Mortgage from "./pages/Mortgage";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
         <Route path="/explore" element={<Explore />}></Route>
 
         <Route path="/btoprojects" element={<BtoProjects />}></Route>
+
+        <Route path="/mortgage" element={<Mortgage />}></Route>
+
+        <Route path="/estimate" element={<Estimate />}></Route>
 
         <Route
           path="/bto/nonmature/:id/estimate"
