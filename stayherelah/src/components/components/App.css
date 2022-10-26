@@ -1,0 +1,66 @@
+h1 {
+  text-align: center;
+}
+.grid__container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.grid__item {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.grid__item--header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.grid__item--range-slider {
+  margin-bottom: 10px;
+}
+.grid__item--label {
+  font-style: italic;
+  font-size: .8em;
+}
+.paymentsCalculatorTable {
+  width: 100%;
+}
+.paymentsCalculatorTable thead th {
+  position: sticky;
+  top: 0;
+  background: white;
+}
+.paymentsCalculatorTable td, .paymentsCalculatorTable th {
+  padding: 15px 5px;
+}
+.paymentsCalculatorTable tr:nth-of-type(even) {
+  background-color: rgba(0,0,0,.05);
+}
+.paymentsCalculatorTable td {
+  width: 25%;
+  text-align: center;
+}
+.to-date-yearly-payment {
+  display: none;
+}
+@media (min-width: 575px) {
+  .to-date-yearly-payment {
+    display: table-cell;
+  }
+  .paymentsCalculatorTable td {
+    width: 16.6666666667%;
+  }
+}
+.graph-container {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: auto;
+}
+@media(min-width: 800px) {
+  .graph-container {
+    width: 50%;
+    display: inline-block;
+  }
+}
