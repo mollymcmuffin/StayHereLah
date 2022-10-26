@@ -44,11 +44,11 @@ const SearchInput = styled.input`
 const Search = () => {
   return (
     <Container>
-      <SearchContainer>
+      {/* <SearchContainer>
         <SearchOutlinedIcon fontSize="large" />
         <SearchInput placeholder="Search for BTO" />
         <Button>Search</Button>
-      </SearchContainer>
+      </SearchContainer> */}
     </Container>
   );
 };
