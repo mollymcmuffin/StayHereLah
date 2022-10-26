@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../components/Header";
-import Form from "../components/Form";
+import { Calculator } from "../components/components/Calculator";
 import styled from "styled-components";
+import Header from "../components/Header";
 
 const Container = styled.div`
   display: flex;
@@ -10,15 +10,15 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Estimate = () => {
+const Mortgage = () => {
   return (
     <>
       <Container>
         <Header />
-        <Form />
+        <Calculator />
       </Container>
     </>
   );
 };
 
-export default Estimate;
+export default Mortgage;

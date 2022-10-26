@@ -66,6 +66,12 @@ const header = () => {
         <StyledLink to={`/btoprojects`}>
           <MenuItem>BTO projects</MenuItem>
         </StyledLink>
+        <StyledLink to={`/estimate`}>
+          <MenuItem>Loan Calculator</MenuItem>
+        </StyledLink>
+        <StyledLink to={`/mortgage`}>
+          <MenuItem>Mortgage Calculator</MenuItem>
+        </StyledLink>
       </Centre>
     </Container>
   );
