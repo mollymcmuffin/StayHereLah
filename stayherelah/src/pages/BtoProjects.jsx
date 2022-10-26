@@ -49,7 +49,7 @@ const BtoProjects = () => {
             <AllProjects data={data} />
             <MapFacilityContainer>
               <MapContainer>
-                <MapForAllProjects />
+                <MapForAllProjects projects={data} />
               </MapContainer>
             </MapFacilityContainer>
           </Wrapper>
