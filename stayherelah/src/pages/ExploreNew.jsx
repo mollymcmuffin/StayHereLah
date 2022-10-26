@@ -1,10 +1,12 @@
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
 import Header from "../components/Header";
+import Featured from "../components/Featured";
+import background from "../images/home/houses.jpg";
+import styled from "styled-components";
+import Search from "../components/Search";
 import { db } from "../firebase";
 import { onValue, ref } from "firebase/database";
 import { React, useEffect, useState } from "react";
-import NeighbourhoodDetails from "../components/NeighbourhoodDetails";
+import AllHood from "../components/AllHood";
 
 const Container = styled.div`
   display: flex;
@@ -13,29 +15,27 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const NeighbourhoodSelection = () => {
-  const location = useLocation();
-  const urlName = location.pathname.split("/"); //http://localhost:3000/bto/mature/0
-  const id = urlName[2];
+const ExploreNew = () => {
+  const [hoods, setHoods] = useState(null);
 
-  const [data, setData] = useState(null);
   useEffect(() => {
     onValue(ref(db), async (snapshot) => {
       const data = await snapshot.val();
       console.log(data["nonmature"]["01Project_Name"][0]);
-      setData(data);
+      setHoods(data);
     });
   }, []);
+
   return (
     <>
-      {data && (
+      {hoods && (
         <Container>
           <Header />
-          <NeighbourhoodDetails data={data} id={id} />
+          <AllHood data={hoods} />
         </Container>
       )}
     </>
   );
 };
 
-export default NeighbourhoodSelection;
+export default ExploreNew;

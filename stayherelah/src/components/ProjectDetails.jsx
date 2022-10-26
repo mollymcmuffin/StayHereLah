@@ -133,7 +133,7 @@ const ProjectDetails = ({ projects, id, maturity }) => {
             )}
             {specialroom !== "nil" && (
               <PriceInfo>
-                {maturity == "mature" ? "THREE-GEN ROOM" : "TWO-ROOM FLEXI"}
+                {maturity == "mature" ? "THREE-GEN ROOM " : "TWO-ROOM FLEXI "}
                 STARTING PRICE: <Price>${specialroom}</Price>
               </PriceInfo>
             )}

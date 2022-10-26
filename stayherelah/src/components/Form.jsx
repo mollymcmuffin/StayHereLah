@@ -18,7 +18,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   background-color: #ffe7cc;
   width: 50%;
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
