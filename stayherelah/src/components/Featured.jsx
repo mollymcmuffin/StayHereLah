@@ -25,12 +25,12 @@ const Wrapper = styled.div`
 `;
 
 const Featured = ({ featuredProjects }) => {
-  const category = "nonmature";
+  const category = "mature";
   const projectsArr = [...featuredProjects[category]["01Project_Name"]];
 
   return (
     <Container>
-      <FeatureTitle>Featured projects</FeatureTitle>
+      <FeatureTitle>Matured projects</FeatureTitle>
       <Wrapper>
         {projectsArr.map((project) => (
           <FeaturedProject
