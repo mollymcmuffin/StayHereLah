@@ -137,7 +137,7 @@ function Form() {
     if (age >= 65) {
       setrecommendation("you are not allowed to bto!!!");
     }
-    if (married == 1 || (age >= 35 && married == 0)) {
+    if ((married == 1 && age >= 21) || (age >= 35 && married == 0)) {
       setrecommendation("Congrats!!You are eligible to bto!!");
       return recommendation;
     } else {
