@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   background-color: #ffe7cc;
-  width: 50%;
+  width: 90%;
   height: 90%;
   display: flex;
   flex-direction: column;
@@ -25,6 +25,7 @@ const Wrapper = styled.div`
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
+  gap: 1rem;
 `;
 
 const FormContainer = styled.form`
@@ -34,6 +35,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   padding-top: 2rem;
   flex-grow: 1;
+  align-items: center;
 `;
 
 const FormButton = styled.button`
@@ -94,15 +96,22 @@ const GrantContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
   width: 80%;
   margin-bottom: 5rem;
+  align-items: center;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 500;
+`;
+
+const OutputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
 `;
 
 function Form() {
@@ -117,6 +126,12 @@ function Form() {
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [stepupgrant, setstepupgrant] = useState(0);
   const [recommendation, setrecommendation] = useState("");
+  const [renovate, setrenovate] = useState("");
+
+  function rec_recommend() {
+    setrenovate(6 * grossmonthly);
+    return renovate;
+  }
 
   function recommend() {
     if (age >= 65) {
@@ -367,12 +382,17 @@ function Form() {
                 type="number"
               />
             </InputContainer>
-
-            <OutputInfo> {recommendation}</OutputInfo>
-            <OutputInfo>
-              Summary of Cost:
-              <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
-            </OutputInfo>
+            <OutputBox>
+              <OutputInfo> {recommendation}</OutputInfo>
+              <OutputInfo>
+                Summary of Cost:
+                <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
+              </OutputInfo>
+              <OutputInfo>
+                Recommended Renovation Cost:
+                <FaDollarSign /> {renovate}
+              </OutputInfo>
+            </OutputBox>
           </FormContainer>
           <GrantContainer>
             <InfoTitle>
@@ -385,6 +405,7 @@ function Form() {
               Total Grant: {enhancecouple + enhancesingle + stepupgrant}
             </InfoTitle>
           </GrantContainer>
+
           <ButtonContainer>
             <FormButton
               type="submit"
@@ -392,6 +413,7 @@ function Form() {
               onClick={() => {
                 calculategrants();
                 recommend();
+                rec_recommend();
               }}
               className="btn btn-primary btn-lg w-100 center "
             >

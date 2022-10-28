@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../components/Header";
 import Form from "../components/Form";
 import styled from "styled-components";
+import RenovateInfo from "../components/RenovateInfo";
+import GrantInfo from "../components/GrantInfo";
 
 const Container = styled.div`
   display: flex;
@@ -10,12 +12,22 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+`;
+
 const Estimate = () => {
   return (
     <>
       <Container>
         <Header />
-        <Form />
+        <Wrapper>
+          <GrantInfo />
+          <Form />
+          <RenovateInfo />
+        </Wrapper>
       </Container>
     </>
   );
