@@ -126,7 +126,7 @@ function Form() {
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [stepupgrant, setstepupgrant] = useState(0);
   const [recommendation, setrecommendation] = useState("");
-  const [renovate, setrenovate] = useState("");
+  const [renovate, setrenovate] = useState(0);
 
   function rec_recommend() {
     setrenovate(6 * grossmonthly);
