@@ -28,7 +28,7 @@ function App() {
         <Route path="/btoprojects/nonmature" element={<Property />}>
           <Route path=":id" element={<Property />} />
         </Route>
-        <Route path="/explore" element={<ExploreNew />}></Route>
+        <Route path="/explore" element={<Explore />}></Route>
 
         <Route path="/btoprojects" element={<BtoProjects />}></Route>
 
