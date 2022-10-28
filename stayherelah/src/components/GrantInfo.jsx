@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 const Box = styled.div`
   background-color: white;
-  height: 100%;
+  height: 80%;
   width: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5rem;
 `;
 
 const GrantBox = styled.div`

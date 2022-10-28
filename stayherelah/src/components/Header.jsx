@@ -5,7 +5,6 @@ import React from "react";
 
 const Container = styled.div`
   border-color: black;
-  border-style: none;
   display: flex;
   align-items: center;
   gap: 10rem;
@@ -15,7 +14,6 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-
   border: solid;
 `;
 
