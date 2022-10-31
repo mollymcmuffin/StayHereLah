@@ -121,12 +121,64 @@ function Form() {
   const [lumpsum, setlumpsum] = useState("");
   const [disposable, setdisposable] = useState("");
   const [saving, setsaving] = useState("");
+  const[cpf,setcpf] = useState("");
   const [enhancesingle, setenhancesingle] = useState(0);
   const [enhancecouple, setenhancecouple] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [stepupgrant, setstepupgrant] = useState(0);
   const [recommendation, setrecommendation] = useState("");
   const [renovate, setrenovate] = useState(0);
+  const [check, setcheck] = useState(0);
+  const [paycpf, setpaycpf] = useState(0);
+  const [paycash, setpaycash] = useState(0);
+
+  function paymentcpf()
+  {
+    if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
+    {
+      if(cpf>=(0.15*grossmonthly*12*5))
+      {
+        setpaycpf("you have enough downpayment for BTO using CPF!");
+        return paycpf;
+      }
+      else 
+      {
+        setpaycpf(0.15*grossmonthly*12*5-cpf);
+        return paycpf;
+
+      }
+
+
+    }
+    else
+    setpaycpf(0);
+    return paycpf
+    
+  }
+
+  function paymentcash()
+  {
+    if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
+    {
+      if(saving>=(0.15*grossmonthly*12*5))
+      {
+        setpaycash("you have enough downpayment for BTO using cash!");
+        return paycash;
+      }
+      else 
+      {
+        setpaycash(0.15*grossmonthly*12*5-saving);
+        return paycash;
+
+      }
+
+
+    }
+    else
+    setpaycash(0)
+    return paycash;
+    
+  }
 
   function rec_recommend() {
     if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
@@ -142,18 +194,27 @@ function Form() {
   function recommend() {
     if (age >= 65) {
       setrecommendation("you are not allowed to bto!!!");
+      setstepupgrant(0);
+      setenhancesingle(0);
+      setenhancecouple(0);
     }
-    else if((married == 1 && age >= 21 &&1<=grossmonthly<=14000) || (age >= 35 && married == 0 && 1<=grossmonthly<=7000)) {
+    else if((married == 1 && age >= 21 &&1<=grossmonthly<=14000 && check!=0) || (age >= 35 && married == 0 && 1<=grossmonthly<=7000 && check!=0)) {
+      paymentcash();
+      paymentcpf();
       setrecommendation("Congrats!!You are eligible to bto!! Refer to renovation guide for tips!");
       return recommendation;
     
     } 
     else {
       setrecommendation("you are not allowed to bto!!!");
+      setstepupgrant(0);
+      setenhancesingle(0);
+      setenhancecouple(0);
     }
   }
 
   function calculateLoanAmount() {
+    setcheck(grossmonthly);
     setdisposable(grossmonthly - lumpsum);
     return disposable;
   }
@@ -297,10 +358,10 @@ function Form() {
   function calculategrants() {
     if (age >= 35 && married == 0 && grossmonthly<=7000) {
       Estimationsingle(grossmonthly, disposable);
-      return monthlyPayment + saving;
+      return monthlyPayment + saving + cpf;
     } else if (((age >= 21 && age < 65) && ((married) => 1))&&grossmonthly<=14000) {
       Estimationcouple(grossmonthly, disposable);
-      return monthlyPayment + saving;
+      return monthlyPayment + saving + cpf;
       
     } else setMonthlyPayment(0);
            return monthlyPayment;
@@ -380,9 +441,18 @@ function Form() {
                 type="number"
               />
             </InputContainer>
-
             <InputContainer>
-              <InputTitle>Saving & CPF Balance</InputTitle>
+              <InputTitle>CPF</InputTitle>
+              <FaDollarSign />
+              <FormInput
+                placeholder="CPF"
+                value={cpf}
+                onInput={(e) => setcpf(e.target.value)}
+                type="number"
+              />
+            </InputContainer>
+            <InputContainer>
+              <InputTitle>Savings</InputTitle>
               <FaDollarSign />
               <FormInput
                 placeholder="Savings"
@@ -404,6 +474,14 @@ function Form() {
               <OutputInfo>
                 Recommended Renovation Cost:
                 <FaDollarSign /> {renovate}
+              </OutputInfo>
+              <OutputInfo>
+               Downpayment Option 1 Cashpayment:
+                <FaDollarSign /> {paycash}
+              </OutputInfo>
+              <OutputInfo>
+                Downpayment Option 2 CPF:
+                <FaDollarSign /> {paycpf}
               </OutputInfo>
             </OutputBox>
           </FormContainer>
