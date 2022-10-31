@@ -454,39 +454,39 @@ const Neighbour = () => {
           <Title>North</Title>
           <Wrapper>
             <AMK>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"amk"}}>
                 <Textbackground>Ang Mo Kio</Textbackground>
               </ProjectLink>
             </AMK>
             <BSN>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"bsn"}}>
                 <Textbackground>Bishan</Textbackground>
               </ProjectLink>
             </BSN>
             <HGN>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"hgn"}}>
                 <Textbackground>Hougang</Textbackground>
               </ProjectLink>
             </HGN>
             <TP>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"tp"}}>
                 <Textbackground>Toa Payoh</Textbackground>
               </ProjectLink>
             </TP>
           </Wrapper>
           <Wrapper>
             <SBW>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"sbw"}}>
                 <Textbackground>Sembawang</Textbackground>
               </ProjectLink>
             </SBW>
             <YSN>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"ysn"}}>
                 <Textbackground>Yishun</Textbackground>
               </ProjectLink>
             </YSN>
             <WLD>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"wld"}}>
                 <Textbackground>Woodlands</Textbackground>
               </ProjectLink>
             </WLD>
@@ -496,12 +496,12 @@ const Neighbour = () => {
           <Title>Central</Title>
           <Wrapper>
             <BM>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"bm"}}>
                 <Textbackground>Bukit Merah</Textbackground>
               </ProjectLink>
             </BM>
             <QTN>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"qtn"}}>
                 <Textbackground>Queenstown</Textbackground>
               </ProjectLink>
             </QTN>
@@ -513,39 +513,39 @@ const Neighbour = () => {
           <Title>East</Title>
           <Wrapper>
             <BDK>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"bdk"}}>
                 <Textbackground>Bedok</Textbackground>
               </ProjectLink>
             </BDK>
             <GY>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"gy"}}>
                 <Textbackground>Geylang</Textbackground>
               </ProjectLink>
             </GY>
             <KLG>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"klg"}}>
                 <Textbackground>Kallang</Textbackground>
               </ProjectLink>
             </KLG>
             <PRS>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"prs"}}>
                 <Textbackground>Pasir Ris</Textbackground>
               </ProjectLink>
             </PRS>
           </Wrapper>
           <Wrapper>
             <PGL>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"pgl"}}>
                 <Textbackground>Punggol</Textbackground>
               </ProjectLink>
             </PGL>
             <SGN>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"sgn"}}>
                 <Textbackground>Serangoon</Textbackground>
               </ProjectLink>
             </SGN>
             <TPS>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"tps"}}>
                 <Textbackground>Tampines</Textbackground>
               </ProjectLink>
             </TPS>
@@ -555,29 +555,29 @@ const Neighbour = () => {
           <Title>West</Title>
           <Wrapper>
             <BP>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"bp"}}>
                 <Textbackground>Bukit Panjang</Textbackground>
               </ProjectLink>
             </BP>
             <CCK>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"cck"}}>
                 <Textbackground>Chua Cho Kang</Textbackground>
               </ProjectLink>
             </CCK>
             <CLT>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"clt"}}>
                 <Textbackground>Clementi</Textbackground>
               </ProjectLink>
             </CLT>
           </Wrapper>
           <Wrapper>
             <JE>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"je"}}>
                 <Textbackground>Jurong East</Textbackground>
               </ProjectLink>
             </JE>
             <JW>
-              <ProjectLink to={"/googlemap"}>
+              <ProjectLink to={"/googlemap"} state = {{from:"jw"}}>
                 <Textbackground>Jurong West</Textbackground>
               </ProjectLink>
             </JW>
