@@ -5,6 +5,7 @@ import Explore from "./pages/Explore";
 import BtoProjects from "./pages/BtoProjects";
 import ExploreNew from "./pages/ExploreNew";
 import NeighbourhoodSelection from "./pages/NeighbourhoodSelection";
+import Googlemap from "./pages/Googlemap";
 import "./App.css";
 
 import {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/neighbourhood" element={<NeighbourhoodSelection />}>
           <Route path=":id" element={<NeighbourhoodSelection />} />
         </Route>
+        <Route path="/googlemap" element={<Googlemap />}></Route>
       </Routes>
     </Router>
   );

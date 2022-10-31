@@ -1,9 +1,9 @@
 import Header from "../components/Header";
 import background from "../images/home/houses.jpg";
-import Map from "../components/Map_Explore"
+import Map from "../components/Map_Explore";
 import styled from "styled-components";
-import {useLocation} from "react-router-dom";
-import {ProSidebarProvider} from "react-pro-sidebar";
+import { useLocation } from "react-router-dom";
+import { ProSidebarProvider } from "react-pro-sidebar";
 import Navbar from "../components/Navbar";
 import React from "react";
 
@@ -28,17 +28,16 @@ const Row = styled.div`
 const Leftpanel = styled.div`
   display: inline-block;
   width: 10%
-  margin-bottom : 100 px;
+  margin-bottom: 100px;
 `;
 
 const Rightpanel = styled.div`
   display: inline-block;
-  width: 100%
+  width: 100%;
 `;
 
 const Googlemap = () => {
-
-  const location = useLocation()
+  const location = useLocation();
   let data = location.state.from;
 
   return (
@@ -49,11 +48,11 @@ const Googlemap = () => {
           <Row>
             <Leftpanel>
               <ProSidebarProvider>
-                <Navbar/>
+                <Navbar />
               </ProSidebarProvider>
             </Leftpanel>
             <Rightpanel>
-              <Map location = {data}></Map>
+              <Map location={data}></Map>
             </Rightpanel>
           </Row>
         </Box>
