@@ -129,18 +129,26 @@ function Form() {
   const [renovate, setrenovate] = useState(0);
 
   function rec_recommend() {
+    if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
+    {
     setrenovate(6 * grossmonthly);
     return renovate;
+    }
+    else 
+    setrenovate(0);
+    return renovate
   }
 
   function recommend() {
     if (age >= 65) {
       setrecommendation("you are not allowed to bto!!!");
     }
-    if ((married == 1 && age >= 21) || (age >= 35 && married == 0)) {
-      setrecommendation("Congrats!!You are eligible to bto!!");
+    else if((married == 1 && age >= 21 &&1<=grossmonthly<=14000) || (age >= 35 && married == 0 && 1<=grossmonthly<=7000)) {
+      setrecommendation("Congrats!!You are eligible to bto!! Refer to renovation guide for tips!");
       return recommendation;
-    } else {
+    
+    } 
+    else {
       setrecommendation("you are not allowed to bto!!!");
     }
   }
@@ -287,14 +295,15 @@ function Form() {
   }
 
   function calculategrants() {
-    if ((age <= 35) & (married <= 0)) {
-      setMonthlyPayment(0);
-      return monthlyPayment;
-    } else if ((age >= 21 && age < 65) & ((married) => 1)) {
+    if (age >= 35 && married == 0 && grossmonthly<=7000) {
+      Estimationsingle(grossmonthly, disposable);
+      return monthlyPayment + saving;
+    } else if (((age >= 21 && age < 65) && ((married) => 1))&&grossmonthly<=14000) {
       Estimationcouple(grossmonthly, disposable);
       return monthlyPayment + saving;
-    } else Estimationsingle(grossmonthly, disposable);
-    return monthlyPayment + saving;
+      
+    } else setMonthlyPayment(0);
+           return monthlyPayment;
   }
 
   return (
@@ -373,7 +382,7 @@ function Form() {
             </InputContainer>
 
             <InputContainer>
-              <InputTitle>Saving & Investment</InputTitle>
+              <InputTitle>Saving & CPF Balance</InputTitle>
               <FaDollarSign />
               <FormInput
                 placeholder="Savings"
@@ -387,6 +396,10 @@ function Form() {
               <OutputInfo>
                 Summary of Cost:
                 <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
+              </OutputInfo>
+              <OutputInfo>
+                Downpayment required(15%):
+                <FaDollarSign /> {parseFloat(monthlyPayment*0.15.toFixed(2))}
               </OutputInfo>
               <OutputInfo>
                 Recommended Renovation Cost:
