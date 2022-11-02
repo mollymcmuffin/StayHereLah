@@ -3,7 +3,6 @@ import background from "../images/home/houses.jpg";
 import Map from "../components/Map_Explore";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { ProSidebarProvider } from "react-pro-sidebar";
 import Navbar from "../components/Navbar";
 import React from "react";
 
@@ -39,22 +38,14 @@ const Rightpanel = styled.div`
 const Googlemap = () => {
   const location = useLocation();
   let data = location.state.from;
+  console.log(data);
 
   return (
     <>
       <Container>
         <Header></Header>
         <Box>
-          <Row>
-            <Leftpanel>
-              <ProSidebarProvider>
-                <Navbar />
-              </ProSidebarProvider>
-            </Leftpanel>
-            <Rightpanel>
-              <Map location={data}></Map>
-            </Rightpanel>
-          </Row>
+          <Map location={data}></Map>
         </Box>
       </Container>
     </>
