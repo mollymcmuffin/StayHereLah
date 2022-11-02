@@ -158,7 +158,7 @@ function Form() {
       (age >= 35 && married == 0 && grossmonthly <= 7000)
     ) {
       if (cpf >= 0.15 * grossmonthly * 12 * 5) {
-        setpaycpf("you have enough downpayment for BTO using CPF!");
+        setpaycpf("Sufficient CPF");
         return paycpf;
       } else {
         setpaycpf(0.15 * grossmonthly * 12 * 5 - cpf);
