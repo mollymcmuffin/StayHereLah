@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google maps</title>
+    <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js" ></script>
+
+    <link rel="stylesheet" href="/Testmap/style.css">
+</head>
+<body>
+  
+    <h1>Google Map</h1>
+    <a href="https://google.com">Google</a>
+    <div>  test</div>
+
+    <div class="container">
+        <!-- Search Input -->
+    <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+    </div>
+    <form name="form1" id="form1"> BTO Projects: 
+        <!-- onchange = "ReadData"  -to activate upon everytime clicking CB -->
+        <select class ='project' name="Project Details: " id="project">
+            <option value="0">Select BTO Project</option>
+            <option value="1">Central Weave @ Ang Mo Kio</option>
+            <option value="2">Alexandra Vale @ Bukit Merah</option>
+            <option value="3">Havelock Hillside @ Bukit Merah</option>
+            <option value="4">Sun Plaza Spring @ Tampines</option>
+    </select>
+    </form>
+    <form name="proj_details">
+        <p1>Waiting Time: </p1> <p1 class="waiting_time"></p1>
+    </form>
+    <form name="proj_filters">
+        <input type="checkbox" id="Mall">
+        <label >Shopping Malls</label>
+        <input type="checkbox" id="Mrt">
+        <label >MRT</label>
+        <input type="checkbox" id="Pri">
+        <label >Primary School</label>
+        <input type="checkbox" id="Sec">
+        <label >Secondary School</label>
+
+    </form>
+
+    <!-- Google Map -->
+    <div id="map"></div>
+    
+
+    <!-- Display geo location data -->
+    <div>
+        <ul class="geo-data">
+            <li>Full Address: <span id="location"></span></li>
+            <li>Postal Code: <span id="postal_code" ></span></li>
+            <li>Country: <span id="country"></span></li>
+            <li>Latitude:<span id="lat"></span></li>
+            <li>Longitutde:<span id="lon"></span></li>
+        </ul>
+
+    </div>
+    <!--Read from Excel file-->
+    <input type="file" id="input">
+    <table id="tbl-data"></table>
+
+    <script src = "read_excel.js"></script>
+    
+    <!--This inintMap button "refreshes" the map -->
+    <button onclick="initMap()" id = 'refresh'>Refresh</button>
+    <script  src="/Testmap/app.js" >
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeU0KYm091allUovk19s4Aw4KfI7l43aI&libraries=places&callback=initMap">
+    </script>
+    <div>
+        <br>
+        <button id="InsBtn">INSERT</button>
+        <button id="getData">GetData</button>
+    </div>
+    <!--Use older version firebase. 5.3.0. Latest is found on website-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src = "https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <!--get database using InsBtn & getData buttons-->
+    <script  src="/Testmap/database.js">
+    </script>
+
+
+
+   
+   
+</body>
+
+</html>
