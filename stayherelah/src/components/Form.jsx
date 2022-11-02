@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 const FormContainer = styled.form`
@@ -35,7 +35,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   padding-top: 2rem;
   flex-grow: 1;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const FormButton = styled.button`
@@ -83,13 +83,14 @@ const InputTitle = styled.span`
   margin-right: 0.5rem;
 `;
 
-const OutputInfo = styled.h4`
+const OutputInfo = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const InfoTitle = styled.p`
-  font-weight: 700;
+const InfoBox = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
 
 const GrantContainer = styled.div`
@@ -97,8 +98,7 @@ const GrantContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   width: 80%;
-  margin-bottom: 5rem;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const StyledLink = styled(Link)`
@@ -110,18 +110,33 @@ const StyledLink = styled(Link)`
 const OutputBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
+  align-items: flex-start;
+  gap: 0.5rem;
+`;
+
+const OptionBox = styled.div`
+  display: flex;
+`;
+
+const InfoWrapper = styled.div``;
+
+const InfoTitle = styled.h4`
+  text-align: center;
+  display: flex;
+`;
+
+const RecommendedBox = styled.div`
+  display: flex;
 `;
 
 function Form() {
   const [age, setAge] = useState(35);
-  const [married, setmarried] = useState(0);
+  const [married, setmarried] = useState(1);
   const [grossmonthly, setgrossmonthly] = useState("");
   const [lumpsum, setlumpsum] = useState("");
   const [disposable, setdisposable] = useState("");
   const [saving, setsaving] = useState("");
-  const[cpf,setcpf] = useState("");
+  const [cpf, setcpf] = useState("");
   const [enhancesingle, setenhancesingle] = useState(0);
   const [enhancecouple, setenhancecouple] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
@@ -131,64 +146,53 @@ function Form() {
   const [check, setcheck] = useState(0);
   const [paycpf, setpaycpf] = useState(0);
   const [paycash, setpaycash] = useState(0);
+  console.log("Render");
 
-  function paymentcpf()
-  {
-    if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
-    {
-      if(cpf>=(0.15*grossmonthly*12*5))
-      {
+  const handleMarried = (event) => {
+    setmarried(event.target.value);
+  };
+
+  function paymentcpf() {
+    if (
+      (married == 1 && age >= 21 && grossmonthly <= 14000) ||
+      (age >= 35 && married == 0 && grossmonthly <= 7000)
+    ) {
+      if (cpf >= 0.15 * grossmonthly * 12 * 5) {
         setpaycpf("you have enough downpayment for BTO using CPF!");
         return paycpf;
-      }
-      else 
-      {
-        setpaycpf(0.15*grossmonthly*12*5-cpf);
+      } else {
+        setpaycpf(0.15 * grossmonthly * 12 * 5 - cpf);
         return paycpf;
-
       }
-
-
-    }
-    else
-    setpaycpf(0);
-    return paycpf
-    
+    } else setpaycpf(0);
+    return paycpf;
   }
 
-  function paymentcash()
-  {
-    if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
-    {
-      if(saving>=(0.15*grossmonthly*12*5))
-      {
+  function paymentcash() {
+    if (
+      (married == 1 && age >= 21 && grossmonthly <= 14000) ||
+      (age >= 35 && married == 0 && grossmonthly <= 7000)
+    ) {
+      if (saving >= 0.15 * grossmonthly * 12 * 5) {
         setpaycash("you have enough downpayment for BTO using cash!");
         return paycash;
-      }
-      else 
-      {
-        setpaycash(0.15*grossmonthly*12*5-saving);
+      } else {
+        setpaycash(0.15 * grossmonthly * 12 * 5 - saving);
         return paycash;
-
       }
-
-
-    }
-    else
-    setpaycash(0)
+    } else setpaycash(0);
     return paycash;
-    
   }
 
   function rec_recommend() {
-    if ((married == 1 && age >= 21 &&grossmonthly<=14000) || (age >= 35 && married == 0 && grossmonthly<=7000))
-    {
-    setrenovate(6 * grossmonthly);
+    if (
+      (married == 1 && age >= 21 && grossmonthly <= 14000) ||
+      (age >= 35 && married == 0 && grossmonthly <= 7000)
+    ) {
+      setrenovate(6 * grossmonthly);
+      return renovate;
+    } else setrenovate(0);
     return renovate;
-    }
-    else 
-    setrenovate(0);
-    return renovate
   }
 
   function recommend() {
@@ -197,15 +201,17 @@ function Form() {
       setstepupgrant(0);
       setenhancesingle(0);
       setenhancecouple(0);
-    }
-    else if((married == 1 && age >= 21 &&1<=grossmonthly<=14000 && check!=0) || (age >= 35 && married == 0 && 1<=grossmonthly<=7000 && check!=0)) {
+    } else if (
+      (married == 1 && age >= 21 && 1 <= grossmonthly <= 14000 && check != 0) ||
+      (age >= 35 && married == 0 && 1 <= grossmonthly <= 7000 && check != 0)
+    ) {
       paymentcash();
       paymentcpf();
-      setrecommendation("Congrats!!You are eligible to bto!! Refer to renovation guide for tips!");
+      setrecommendation(
+        "Congrats!!You are eligible to bto!! Refer to renovation guide for tips!"
+      );
       return recommendation;
-    
-    } 
-    else {
+    } else {
       setrecommendation("you are not allowed to bto!!!");
       setstepupgrant(0);
       setenhancesingle(0);
@@ -356,15 +362,19 @@ function Form() {
   }
 
   function calculategrants() {
-    if (age >= 35 && married == 0 && grossmonthly<=7000) {
+    if (age >= 35 && married == 0 && grossmonthly <= 7000) {
       Estimationsingle(grossmonthly, disposable);
       return monthlyPayment + saving + cpf;
-    } else if (((age >= 21 && age < 65) && ((married) => 1))&&grossmonthly<=14000) {
+    } else if (
+      age >= 21 &&
+      age < 65 &&
+      ((married) => 1) &&
+      grossmonthly <= 14000
+    ) {
       Estimationcouple(grossmonthly, disposable);
       return monthlyPayment + saving + cpf;
-      
     } else setMonthlyPayment(0);
-           return monthlyPayment;
+    return monthlyPayment;
   }
 
   return (
@@ -381,7 +391,7 @@ function Form() {
               <FormInput
                 placeholder="Enter your age"
                 value={age}
-                onInput={(e) => setAge(e.target.value)}
+                onChange={(e) => setAge(e.target.value)}
                 onKeyUp={calculateLoanAmount}
                 type="number"
               />
@@ -394,14 +404,16 @@ function Form() {
                   type={"radio"}
                   name={"Married"}
                   value={1}
-                  onInput={(e) => setmarried(e.target.value)}
+                  onChange={handleMarried}
+                  checked={married == 1}
                 />
                 Yes
                 <FormInput
                   type={"radio"}
                   name={"Married"}
                   value={0}
-                  onInput={(e) => setmarried(e.target.value)}
+                  onChange={handleMarried}
+                  checked={married == 0}
                 />
                 No
               </div>
@@ -464,38 +476,60 @@ function Form() {
             <OutputBox>
               <OutputInfo> {recommendation}</OutputInfo>
               <OutputInfo>
-                Summary of Cost:
-                <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
+                Estimated Buying Power:
+                <h4>
+                  <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
+                </h4>
               </OutputInfo>
               <OutputInfo>
                 Downpayment required(15%):
-                <FaDollarSign /> {parseFloat(monthlyPayment*0.15.toFixed(2))}
+                <h4>
+                  <FaDollarSign />{" "}
+                  {parseFloat(monthlyPayment * (0.15).toFixed(2))}
+                </h4>
               </OutputInfo>
-              <OutputInfo>
-                Recommended Renovation Cost:
-                <FaDollarSign /> {renovate}
-              </OutputInfo>
-              <OutputInfo>
-               Downpayment Option 1 Cashpayment:
-                <FaDollarSign /> {paycash}
-              </OutputInfo>
-              <OutputInfo>
+
+              <OptionBox>
+                Downpayment Option 1 Cashpayment:
+                <h4>
+                  <FaDollarSign />
+                  {paycash}
+                </h4>
+              </OptionBox>
+              <OptionBox>
                 Downpayment Option 2 CPF:
-                <FaDollarSign /> {paycpf}
-              </OutputInfo>
+                <h4>
+                  <FaDollarSign />
+                  {paycpf}
+                </h4>
+              </OptionBox>
             </OutputBox>
+            <GrantContainer>
+              <InfoWrapper>
+                <InfoTitle>
+                  <FaDollarSign />
+                  Grants
+                </InfoTitle>
+                <InfoBox>
+                  Step-Up CPF Housing Grant: <h4>{stepupgrant}</h4>
+                </InfoBox>
+                <InfoBox>
+                  EHG Grant: <h4>{enhancecouple + enhancesingle}</h4>
+                </InfoBox>
+                <InfoBox>
+                  Total Grant:{" "}
+                  <h4>{enhancecouple + enhancesingle + stepupgrant}</h4>
+                </InfoBox>
+              </InfoWrapper>
+              <RecommendedBox>
+                <h4>
+                  Recommended Renovation Cost:
+                  <FaDollarSign />
+                  {renovate}
+                </h4>
+              </RecommendedBox>
+            </GrantContainer>
           </FormContainer>
-          <GrantContainer>
-            <InfoTitle>
-              <FaDollarSign />
-              Grants
-            </InfoTitle>
-            <InfoTitle>Step-Up CPF Housing Grant: {stepupgrant}</InfoTitle>
-            <InfoTitle>EHG Grant: {enhancecouple + enhancesingle}</InfoTitle>
-            <InfoTitle>
-              Total Grant: {enhancecouple + enhancesingle + stepupgrant}
-            </InfoTitle>
-          </GrantContainer>
 
           <ButtonContainer>
             <FormButton

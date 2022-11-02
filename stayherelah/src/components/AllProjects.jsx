@@ -35,24 +35,47 @@ const ProjectLink = styled(Link)`
   text-decoration: none;
 `;
 
+const MaturityBox = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 1rem;
+`;
+
+const MaturityTitle = styled.h3`
+  text-align: center;
+`;
+
 const AllProjects = ({ data }) => {
   const nonmature = [...data["nonmature"]["01Project_Name"]];
   const mature = [...data["mature"]["01Project_Name"]];
   return (
     <Container>
       <ProjectContainer>
-        {nonmature.map((project) => (
-          <ProjectLink
-            to={`/btoprojects/nonmature/${nonmature.indexOf(project)}`}
-          >
-            <Project>{project}</Project>
-          </ProjectLink>
-        ))}
-        {mature.map((project) => (
-          <ProjectLink to={`/btoprojects/mature/${mature.indexOf(project)}`}>
-            <Project>{project}</Project>
-          </ProjectLink>
-        ))}
+        <MaturityBox>
+          <MaturityTitle>Non-Mature Projects</MaturityTitle>
+          <div>
+            {nonmature.map((project) => (
+              <ProjectLink
+                to={`/btoprojects/nonmature/${nonmature.indexOf(project)}`}
+              >
+                <Project>{project}</Project>
+              </ProjectLink>
+            ))}
+          </div>
+        </MaturityBox>
+        <MaturityBox>
+          <MaturityTitle>Mature Projects</MaturityTitle>
+          <div>
+            {mature.map((project) => (
+              <ProjectLink
+                to={`/btoprojects/mature/${mature.indexOf(project)}`}
+              >
+                <Project>{project}</Project>
+              </ProjectLink>
+            ))}
+          </div>
+        </MaturityBox>
       </ProjectContainer>
     </Container>
   );

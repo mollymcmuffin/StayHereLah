@@ -22,6 +22,23 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    height: 10px;
+    width: 0px;
+    border: 1px solid grey;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: #b0b0b0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: hsl(0, 0%, 60%);
+  }
 `;
 
 const ProjectTitle = styled.h1`
@@ -77,6 +94,12 @@ const CalculateButton = styled.button`
   padding: 1rem;
 `;
 
+const NearbyPriceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const ProjectDetails = ({ projects, id, maturity }) => {
   //console.log(projects);
   const flatData = [...projects[maturity]["03flattype"][`flattype0${id}`]];
@@ -87,6 +110,7 @@ const ProjectDetails = ({ projects, id, maturity }) => {
   const fourroom = projects[maturity]["14four_room_min_price"][id];
   console.log("fourroom");
   const fiveroom = projects[maturity]["18five_room_min_price"][id];
+  const estimatedPrice = 1.1 * fourroom;
   console.log("fiveroom");
   const specialroom =
     maturity == "mature"
@@ -138,9 +162,39 @@ const ProjectDetails = ({ projects, id, maturity }) => {
               </PriceInfo>
             )}
           </PriceContainer>
+          <PriceContainer>
+            {tworoom !== "nil" && (
+              <PriceInfo>
+                TWO ROOM NEARBY PRICE: <Price>${1.2 * tworoom}</Price>{" "}
+              </PriceInfo>
+            )}
+
+            {threeroom !== "nil" && (
+              <PriceInfo>
+                {" "}
+                THREE ROOM NEARBY PRICE: <Price> ${1.2 * threeroom}</Price>
+              </PriceInfo>
+            )}
+            {fourroom !== "nil" && (
+              <PriceInfo>
+                FOUR ROOM NEARBY PRICE: <Price>${1.2 * fourroom}</Price>
+              </PriceInfo>
+            )}
+            {fiveroom !== "nil" && (
+              <PriceInfo>
+                FIVE ROOM NEARBY PRICE: <Price>${1.2 * fiveroom}</Price>
+              </PriceInfo>
+            )}
+            {specialroom !== "nil" && (
+              <PriceInfo>
+                {maturity == "mature" ? "THREE-GEN ROOM " : "TWO-ROOM FLEXI "}
+                NEARBY PRICE: <Price>${1.2 * specialroom}</Price>
+              </PriceInfo>
+            )}
+          </PriceContainer>
           {/* <NearbyPriceContainer>
             Transacted Prices of Resale Flats Nearby
-            <Price>$426k - $540k</Price>
+            <Price>${estimatedPrice}</Price>
           </NearbyPriceContainer> */}
         </ProjectInformation>
       </Wrapper>
