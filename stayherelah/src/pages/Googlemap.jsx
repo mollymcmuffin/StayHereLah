@@ -4,6 +4,7 @@ import Map from "../components/Map_Explore";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { ProSidebarProvider } from "react-pro-sidebar";
 import React from "react";
 
 const Container = styled.div`
@@ -45,7 +46,16 @@ const Googlemap = () => {
       <Container>
         <Header></Header>
         <Box>
-          <Map location={data}></Map>
+          <Row>
+            <Leftpanel>
+              <ProSidebarProvider>
+                <Navbar location={data}></Navbar>
+              </ProSidebarProvider>
+            </Leftpanel>
+            <Rightpanel>
+              <Map location={data}></Map>
+            </Rightpanel>
+          </Row>
         </Box>
       </Container>
     </>
