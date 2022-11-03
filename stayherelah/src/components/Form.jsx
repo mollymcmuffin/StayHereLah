@@ -6,6 +6,7 @@ import { FcHome } from "react-icons/fc";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { set } from "firebase/database";
 
 const Container = styled.div`
   display: flex;
@@ -146,6 +147,7 @@ function Form() {
   const [check, setcheck] = useState(0);
   const [paycpf, setpaycpf] = useState(0);
   const [paycash, setpaycash] = useState(0);
+  const [eligibility, setEligibility] = useState(false);
 
   const handleMarried = (event) => {
     setmarried(event.target.value);
@@ -169,8 +171,8 @@ function Form() {
 
   function paymentcash() {
     if (
-      (married == 1 && age >= 21 && disposable <= 14000) ||
-      (age >= 35 && married == 0 && disposable <= 7000)
+      (married == 1 && age >= 21 && grossmonthly <= 14000) ||
+      (age >= 35 && married == 0 && grossmonthly <= 7000)
     ) {
       if (saving >= 0.15 * grossmonthly * 12 * 5) {
         setpaycash("you have enough downpayment for BTO using cash!");
@@ -195,7 +197,7 @@ function Form() {
   }
 
   function recommend() {
-    if (age >= 65) {
+    if (age >= 65 || disposable < 0) {
       setrecommendation("you are not allowed to bto!!!");
       setstepupgrant(0);
       setenhancesingle(0);
@@ -209,6 +211,7 @@ function Form() {
       setrecommendation(
         "Congrats!!You are eligible to bto!! Refer to renovation guide for tips!"
       );
+      setEligibility(true);
       return recommendation;
     } else {
       setrecommendation("you are not allowed to bto!!!");
@@ -474,60 +477,70 @@ function Form() {
             </InputContainer>
             <OutputBox>
               <OutputInfo> {recommendation}</OutputInfo>
-              <OutputInfo>
-                Estimated Buying Power:
-                <h4>
-                  <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
-                </h4>
-              </OutputInfo>
-              <OutputInfo>
-                Downpayment required(15%):
-                <h4>
-                  <FaDollarSign />{" "}
-                  {parseFloat(monthlyPayment * (0.15).toFixed(2))}
-                </h4>
-              </OutputInfo>
+              {eligibility && (
+                <OutputInfo>
+                  Estimated Buying Power:
+                  <h4>
+                    <FaDollarSign /> {parseFloat(monthlyPayment.toFixed(2))}
+                  </h4>
+                </OutputInfo>
+              )}
+              {eligibility && (
+                <OutputInfo>
+                  Downpayment required(15%):
+                  <h4>
+                    <FaDollarSign />{" "}
+                    {parseFloat(monthlyPayment * (0.15).toFixed(2))}
+                  </h4>
+                </OutputInfo>
+              )}
 
-              <OptionBox>
-                Downpayment Option 1 Cashpayment:
-                <h4>
-                  <FaDollarSign />
-                  {paycash}
-                </h4>
-              </OptionBox>
-              <OptionBox>
-                Downpayment Option 2 CPF:
-                <h4>
-                  <FaDollarSign />
-                  {paycpf}
-                </h4>
-              </OptionBox>
+              {eligibility && (
+                <OptionBox>
+                  Downpayment Option 1 Cashpayment:
+                  <h4>
+                    <FaDollarSign />
+                    {paycash}
+                  </h4>
+                </OptionBox>
+              )}
+              {eligibility && (
+                <OptionBox>
+                  Downpayment Option 2 CPF:
+                  <h4>
+                    <FaDollarSign />
+                    {paycpf}
+                  </h4>
+                </OptionBox>
+              )}
             </OutputBox>
-            <GrantContainer>
-              <InfoWrapper>
-                <InfoTitle>
-                  <FaDollarSign />
-                  Grants
-                </InfoTitle>
-                <InfoBox>
-                  Step-Up CPF Housing Grant: <h4>{stepupgrant}</h4>
-                </InfoBox>
-                <InfoBox>
-                  EHG Grant: <h4>{enhancecouple + enhancesingle}</h4>
-                </InfoBox>
-                <InfoBox>
-                  Total Grant:{" "}
-                  <h4>{enhancecouple + enhancesingle + stepupgrant}</h4>
-                </InfoBox>
-              </InfoWrapper>
-              <RecommendedBox>
-                <h4>
-                  Recommended Renovation Cost:
-                  <FaDollarSign />
-                  {renovate}
-                </h4>
-              </RecommendedBox>
-            </GrantContainer>
+            {eligibility && (
+              <GrantContainer>
+                <InfoWrapper>
+                  <InfoTitle>
+                    <FaDollarSign />
+                    Grants
+                  </InfoTitle>
+                  <InfoBox>
+                    Step-Up CPF Housing Grant: <h4>{stepupgrant}</h4>
+                  </InfoBox>
+                  <InfoBox>
+                    EHG Grant: <h4>{enhancecouple + enhancesingle}</h4>
+                  </InfoBox>
+                  <InfoBox>
+                    Total Grant:{" "}
+                    <h4>{enhancecouple + enhancesingle + stepupgrant}</h4>
+                  </InfoBox>
+                </InfoWrapper>
+                <RecommendedBox>
+                  <h4>
+                    Recommended Renovation Cost:
+                    <FaDollarSign />
+                    {renovate}
+                  </h4>
+                </RecommendedBox>
+              </GrantContainer>
+            )}
           </FormContainer>
 
           <ButtonContainer>
