@@ -134,7 +134,7 @@ function Form() {
   const [married, setmarried] = useState(1);
   const [grossmonthly, setgrossmonthly] = useState("");
   const [lumpsum, setlumpsum] = useState("");
-  const [disposable, setdisposable] = useState("");
+  const [disposable, setdisposable] = useState(0);
   const [saving, setsaving] = useState("");
   const [cpf, setcpf] = useState("");
   const [enhancesingle, setenhancesingle] = useState(0);
@@ -146,7 +146,6 @@ function Form() {
   const [check, setcheck] = useState(0);
   const [paycpf, setpaycpf] = useState(0);
   const [paycash, setpaycash] = useState(0);
-  console.log("Render");
 
   const handleMarried = (event) => {
     setmarried(event.target.value);
@@ -170,8 +169,8 @@ function Form() {
 
   function paymentcash() {
     if (
-      (married == 1 && age >= 21 && grossmonthly <= 14000) ||
-      (age >= 35 && married == 0 && grossmonthly <= 7000)
+      (married == 1 && age >= 21 && disposable <= 14000) ||
+      (age >= 35 && married == 0 && disposable <= 7000)
     ) {
       if (saving >= 0.15 * grossmonthly * 12 * 5) {
         setpaycash("you have enough downpayment for BTO using cash!");
