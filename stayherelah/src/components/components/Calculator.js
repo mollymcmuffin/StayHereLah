@@ -8,7 +8,7 @@ import { handleMortgageDataChange } from "./utils";
 export const Calculator = () => {
   const [depositAmount, setDepositAmount] = useState(72000);
   const [purchasingHousePrice, setPurchasingHousePrice] = useState(285000);
-  const [mortgageTerm, setMortgageTerm] = useState(30);
+  const [mortgageTerm, setMortgageTerm] = useState(25);
   const [interestRate, setInterestRate] = useState(1.8);
 
   //Set initial values for the whole mortgage term
