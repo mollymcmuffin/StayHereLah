@@ -22,7 +22,7 @@ export const CalculatorControls = (props) => {
           className="grid__item--range-slider"
           id="purchasingHousePrice"
           min="50000"
-          max="1000000"
+          max="750000"
           step="1000"
           value={props.purchasingHousePrice}
           onChange={(event) =>
@@ -42,7 +42,7 @@ export const CalculatorControls = (props) => {
           className="grid__item--range-slider"
           id="depositAmount"
           min="1000"
-          max="1000000"
+          max="150000"
           step="1000"
           value={props.depositAmount}
           onChange={(event) => props.setDepositAmount(event.target.value)}
@@ -58,7 +58,7 @@ export const CalculatorControls = (props) => {
           className="grid__item--range-slider"
           id="mortgageTerm"
           min="5"
-          max="30"
+          max="35"
           step="1"
           value={props.mortgageTerm}
           onChange={(event) => props.setMortgageTerm(event.target.value)}

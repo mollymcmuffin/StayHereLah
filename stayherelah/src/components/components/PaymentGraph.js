@@ -144,13 +144,14 @@ export const PaymentGraph = (props) => {
       barGraphData.datasets[1].data.push(props.yearlyPayments[i].interestPaid);
     }
   }
+
   return (
     <div>
       <div className="graph-container">
-        <Line data={graphData} options={graphOption} />
+        <Line data={graphData} />
       </div>
       <div className="graph-container">
-        <Bar data={barGraphData} options={graphOption} />
+        <Bar data={barGraphData} />
       </div>
     </div>
   );
