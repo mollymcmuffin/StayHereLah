@@ -20,4 +20,4 @@ Prerequisites: Internet browser
 Built with: React.Js, Beautiful Soup, Firebase
 
 
-Authors: Toh Leong Seng, Lee Yu Xuan, Lee Zheng Xuan, Ng Zheng Kai. (View their profile at 'contributors' tab)
+Authors: Toh Leong Seng, Lee Yu Xuan, Lee Zheng Xuan, Ng Zheng Kai, Dwahni. (View their profile at 'contributors' tab)
