@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Featured from "../components/Featured";
-import background from "../images/home/houses.jpg";
+import background from "../images/home/house.jpg";
 import styled from "styled-components";
 import Search from "../components/Search";
 import { db } from "../firebase";
